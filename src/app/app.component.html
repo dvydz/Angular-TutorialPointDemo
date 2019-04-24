@@ -1,20 +1,107 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
+<!-- <div style="text-align: center">
+  <p>
+    Hello ! Welcome to {{title}}
+  </p> -->
+
+  <!-- piping -->
+  <!-- <p>
+    Hello ! Welcome to {{title | uppercase}}
+  </p>
+  <div>Months:
+      <select (change)="changeMonth($event)">
+          <option *ngFor="let i of months">{{i}}</option>
+      </select>
+  </div>
+  <div><br>
+      <span *ngIf="isBoolean else printElsePart">Condition is Valid from Span</span>
+      <ng-template #printElsePart>Condition is invalid from template!!!</ng-template>
+      <ng-template #printThenPart>Condition is VALID from template</ng-template>
+  </div>
+  <br>
+  <button (click)="myClickfunction($event)">Click me</button>
+  <br><br><br>
+</div> -->
+
+<!-- using custom directive -->
+<!-- <div style="text-align: center">
+  <span>--------------------------------------------------------------------------</span><br>
+    <span appChangeText>Welcome to {{title}}</span><br>
+  <span>---------------------------------------------------------------------------</span>
+</div> -->
+
+<!-- Pipe -->
+<!-- <div style="width:100%">
+  <div style="width:40%;float:left;border:solid 1px red;">
+      <h1>Uppercase Pipe</h1>
+      <b>{{title | uppercase}}</b><br>
+      <h1>Lowercase pipe</h1>
+      <b>{{title | lowercase}}</b><br>
+      <h1>Currency Pipe</h1>
+      <b>{{1234.56 | currency:"USD"}}</b> <br>
+      <b>{{1234.56 | currency:"USD":true}}</b> <br>
+      <h1>Date pipe</h1>
+      <b>{{todaydate | date:"d/M/y"}}</b><br>
+      <b>{{todaydate | date: 'shortTime' }}</b>
+      <h1>Decimal pipe</h1>
+      <b>{{234.56789 | number:"3.2-5"}}</b>
+  </div>
+    <div style="width: 40%;float: left;border:solid 1px green;">
+      <h1>Json Pipe</h1>
+      <b>{{ jsonval | json }}</b>
+      <h1>Percent Pipe</h1>
+      <b>{{00.54565 | percent}}</b>
+      <h1>Slice Pipe</h1>
+      <b>{{months | slice:2:6}}</b> 
+      // here 2 and 6 refers to the start and the end index
+    </div>
+</div> -->
+<!-- <p>Custom Pipe:</p>
+<h3>Square root of 64 = {{64 | sqrt }}</h3> -->
+
+<!-- <a routerLink="new-cmp">New Component</a>
+<br>
+<router-outlet></router-outlet> -->
+
+<!-- service -->
+<!-- <h2>Todays Date is :</h2><br>
+{{todayDate}}<br>
+{{componentProperty}}
+<app-new-cmp></app-new-cmp> -->
+
+<!-- template-driven-form -->
+<!-- (ngSubmit) -> is the onsubmit function
+#login="ngForm" -> ngForm is default name and login is the variable Name
+(login.value) -> the login variable defined earlier passing the value of form
+ngModel -> inside the input attribute says it is a form's property -->
+<!-- <form #login="ngForm" (ngSubmit)="onClickSubmit(login.value)">
+    <input type="text" name="emailid" placeholder="email_id" ngModel><br><br>
+    <input type="password" name="passwd" placeholder="password" ngModel><br><br>
+    <input type="submit" value="submit">
+</form> -->
+
+<!-- model-driven-form -->
+<!-- formGroup -> to define the form group with name "formdata"
+(unlike the template driven form, inside " " is the variable here)
+formControlName -> its given a value that used in .ts file -->
+<form [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)">
+  <input type="text" name="emailid" class="fortextbox" placeholder="email_id" formControlName="emailid"><br><br>
+  <input type="password" name="passwd" class="fortextbox" placeholder="password" formControlName="passwd"><br><br>
+  <input type="submit" [disabled]="!formdata.valid" class="forSubmit" value="login">
+</form>
+<p>
+  Email Entered: {{emailid}}
+</p>
+
+<div>
+    <button (click)="animate()">Click Me</button>
+    <div [@myanimation]="state" class="rotate">
+        <img src="../assets/smiley.jpg" width="100" height="100">
+    </div>
+  </div>
+
+<ul *ngFor="let data of httpdata">
+    <li>Name: {{data.name}}, Address: {{data.address.city}}</li>
 </ul>
+
+
 
